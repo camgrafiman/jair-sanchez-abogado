@@ -3,7 +3,7 @@
 
 .container {
 	min-height: 100vh;
-	padding: 0 0.5rem;
+	padding: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -11,7 +11,7 @@
 }
 
 .main {
-	padding: 0.5em 0em;
+	padding:0;
 	width: 100%;
 	flex: 1 1;
 	display: flex;
@@ -19,6 +19,8 @@
 	justify-content: flex-start;
 	align-items: center;
 }
+
+
 
 .footer {
 	width: 100%;
