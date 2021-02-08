@@ -1,0 +1,52 @@
+@import './variables.scss';
+.contenedorServicios {
+    background:white;
+    padding:2em;
+    
+}
+.caja {
+    // border:1px solid $color-secundario;
+    // border-radius:10px;
+    padding: 1em;
+    background:white;
+    height:100%;
+    
+}
+.efectoSombra {
+    position: relative;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1);
+}
+
+.efectoSombra:before,
+.efectoSombra:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    top: 10px;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    border-radius: 100px / 10px;
+}
+
+.efectoSombra:after {
+    right: 10px;
+    left: auto;
+    transform: skew(8deg) rotate(3deg);
+}
+.iconos {
+    color: $color-secundario;
+    width: 50px;
+    height: 50px;
+    margin-bottom:0.5em;
+}
+.titulos {
+    color:$color-principal;
+    font-size:1.3em;
+    text-align:center;
+    font-family: 'Vidaloka', serif;
+}
+.textos {
+    text-align:justify;
+}

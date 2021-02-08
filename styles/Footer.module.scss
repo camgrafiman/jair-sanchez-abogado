@@ -1,0 +1,155 @@
+@import './variables.scss';
+
+
+.footer {
+    width: 100%;
+    height: auto;
+    margin-top:4em;
+    padding-bottom:5em;
+    padding-bottom:5em;
+    border-top: 1px solid #eaeaea;
+    display: flex;
+    justify-content: center;
+    color: $footer-texto;
+    background-color: $footer-fondo;
+    background-image: url('../public/assets/fondo-footer-las-palmas.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    
+
+    a {
+        vertical-align: baseline;
+        position: relative;
+        display: inline-block;
+        margin: 2px 4px;
+        outline: none;
+        color: #fff;
+        text-decoration: none;
+        letter-spacing: 1px;
+    }
+    hr {
+        background-color: $color-principal;
+    }
+
+    img {
+        margin-left: 0.5rem;
+    }
+    .iconos {
+        color: $color-secundario;
+        width: 30px;
+        height:30px;
+        margin-right:10%;
+    }
+    .textoIconos {
+        width:70%;
+    }
+    .tituloFooter {
+        font-family: 'Vidaloka', serif;
+        font-size:1.3em;
+        font-weight: bold;
+    }
+    .listado li {
+        background:none !important;
+        border-bottom-color: $color-principal;
+    }
+    
+    .enlace {
+        color: $color-light;
+        text-decoration: none;
+        padding: 2px 5px;
+        border-radius: 3px;
+        transition: all .5s;
+
+        &:hover {
+            background: $color-principal;
+            -webkit-text-decoration: wavy;
+            text-decoration: wavy;
+            color: white;
+
+        }
+    }
+
+    .enlaceLight {
+        cursor: pointer;
+        color: $color-light;
+        border-bottom: 1px solid $color-light;
+        text-decoration: none;
+        padding: 2px 5px;
+        transition: all .5s;
+
+        &:hover {
+            background: $color-principal;
+            border-radius: 3px;
+            -webkit-text-decoration: wavy;
+            text-decoration: wavy;
+            color: white;
+
+        }
+    }
+    // .enlaceEfecto {
+    //     color: rgba(243, 243, 243, 0.5);
+    //     text-decoration: none;
+    //     font-weight: 500;
+    //     text-shadow: none;
+    // }
+
+    // .enlaceEfecto::before {
+    //     color: $color-light;
+    //     content: attr(data-hover);
+    //     position: absolute;
+    //     transition: transform 0.3s, opacity 0.3s;
+    // }
+
+    // .enlaceEfecto:hover::before,
+    // .enlaceEfecto:focus::before {
+    //     transform: scale(0.9);
+    //     opacity: 0;
+    // }
+    .enlaceEfecto {
+        padding: 5px;
+        color: $color-light;
+        text-decoration: none;
+        text-shadow: none;
+        transition: color 0.3s;
+    }
+
+    .enlaceEfecto::before,
+    .enlaceEfecto::after {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        content: '';
+        opacity: 0;
+        transition: opacity 0.3s, transform 0.3s;
+        transform: translateY(-10px);
+    }
+
+    .enlaceEfecto::before {
+        top: 0;
+        transform: translateY(-10px);
+    }
+
+    .enlaceEfecto::after {
+        bottom: 0;
+        transform: translateY(10px);
+    }
+
+    .enlaceEfecto:hover,
+    .enlaceEfecto:focus {
+        color: #fff;
+    }
+
+    .enlaceEfecto:hover::before,
+    .enlaceEfecto:focus::before,
+    .enlaceEfecto:hover::after,
+    .enlaceEfecto:focus::after {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+
+}
+

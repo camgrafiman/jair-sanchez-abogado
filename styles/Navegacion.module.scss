@@ -6,6 +6,19 @@
 }
 
 .navContainer {
-   box-shadow: 1px 1px 17px 0px lightgrey; 
-   opacity:0.5;
+    background:#f8f9fa91 !important;
+    box-shadow: 1px 1px 17px 0px lightgrey; 
+}
+.navContainerBg {
+    background: #f8f9fa !important;
+    box-shadow: 1px 1px 17px 0px lightgrey;
+}
+.stickyNav {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index:10000;
+}
+.iconos {
+    max-height:20px;
 }
