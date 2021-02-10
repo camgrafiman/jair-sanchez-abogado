@@ -1,10 +1,20 @@
 /* Tipografía Mada - principal y Vidaloka - secundaria */
 @import url('https://fonts.googleapis.com/css2?family=Mada:wght@200;300;400;500;600;700;900&family=Vidaloka&display=swap');
-
+@import './variables.scss';
 *,
 *:after,
 *::before {
 	box-sizing: border-box;
+}
+::-moz-selection {
+	/* Code for Firefox */
+	color: whitesmoke;
+	background: $color-principal;
+}
+
+::selection {
+	color: whitesmoke;
+	background: $color-principal;
 }
 html,
 body {

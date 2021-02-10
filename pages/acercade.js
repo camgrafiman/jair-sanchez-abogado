@@ -8,7 +8,7 @@ const AcercaDe = () => {
     
     return (
         <ContainerPrincipal title="Jair Sánchez - Abogado | Acerca de mí">
-            <Container className="mt-5">
+            <Container className="mt-5 pb-5">
                 <Row data-aos="fade-up"
                     data-aos-anchor-placement="top-center">
                     <Col><h3>Jair Sánchez Bonilla</h3><br />

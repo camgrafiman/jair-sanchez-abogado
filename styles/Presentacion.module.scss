@@ -56,18 +56,24 @@
         transform: translateX(-10px) scale(1.25);
         transition: 0.15s ease-out;
     }
+    &:focus {
+       outline: none;
+    }
 }
 
 .botonGeneral::before,
 .botonGeneral::after {
-    background: $color-principal;
+    background: $color-principal !important;
     content: '';
     position: absolute;
     z-index: -1;
 }
 
 .botonGeneral:hover {
-    color: $color-principal;
+    color: white !important;
+    background: none !important;
+    border: 2px solid $color-principal !important;
+    z-index: 1;
 
     .iconoBoton,
     .iconoBoton::before {
@@ -88,15 +94,11 @@
 }
 
 
-
-
-
 .btn5 {
     overflow: hidden;
 }
 
 .btn5::after {
-    /*background-color: #f00;*/
     height: 100%;
     left: -35%;
     top: 0;
@@ -109,4 +111,16 @@
 .btn5:hover:after {
     height: 100%;
     width: 135%;
+}
+.fullContainer {
+    background:rgba(255, 255, 255);
+    margin-top:0;
+    margin-bottom:0;
+}
+.contacto {
+    background:white;
+    padding:1.3em;
+    margin-bottom:2em;
+    border-radius:0.5em;
+    border:1px solid $color-principal;
 }

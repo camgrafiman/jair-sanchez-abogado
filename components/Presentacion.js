@@ -19,7 +19,7 @@ const Presentacion = () => {
                                     No dude en realizar su consulta por vía telefónica o por nuestro formulario.<br />
                                     Contactaremos con usted tan pronto como sea posible.
                                 </p>
-                                <div className="d-flex flex-row justify-content-center align-items-center">
+                                <div className="d-flex flex-row justify-content-center align-items-center flex-wrap">
                                     <Link className={styles.link} href="/servicios"><button className={styles.botonGeneral + " " + styles.btn5}><FontAwesomeIcon icon={['fas', 'chevron-circle-right']} className={styles.iconoBoton} /> <span className={styles.textoBoton}>Ver servicios</span></button></Link>
                                     <Link href="/contacto"><button className={styles.botonGeneral + " " + styles.btn5} ><FontAwesomeIcon icon={['fas', 'hand-point-right']} className={styles.iconoBoton} /> <span className={styles.textoBoton}>Solicitar consulta</span> </button></Link>
                                 </div>
