@@ -32,12 +32,16 @@ const apolloServer = new ApolloServer({
             }
         }
         return { db }
-    }
+    },
+    introspection: true,
+    playground: true,
 });
 
 
 
-const handler = apolloServer.createHandler({ path: "/api/graphql" });
+const handler = apolloServer.createHandler({
+    path: '/api/graphql'
+});
 
 export const config = {
     api: {
