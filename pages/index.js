@@ -64,12 +64,14 @@ export async function getStaticProps(context) {
     //     `
     // })
 
-    /* USAR API GRAPHQL  */
+/* USAR API GRAPHQL  */
+    console.log('URL DE GRAPHQL: ', process.env.GRAPHQL_URI)
+    console.log(process.env.SALUDO)
 
     const client = new ApolloClient({
         // ssrMode: false,
         link: new HttpLink({
-            uri: 'http://localhost:3000/api/graphql',
+            uri: process.env.GRAPHQL_URI,
             credentials: 'same-origin'
         }),
         cache: new InMemoryCache(),
