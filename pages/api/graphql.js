@@ -14,7 +14,7 @@ const schema = makeExecutableSchema({
 
 let db
 
-console.log(process.env.MONGO_DB_URI);
+// console.log(process.env.MONGO_DB_URI);
 
 // Crear el servidor a partir de una instancia de ApolloServer:
 const apolloServer = new ApolloServer({
