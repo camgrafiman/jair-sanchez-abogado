@@ -1,8 +1,6 @@
 import { ApolloServer, makeExecutableSchema } from 'apollo-server-micro';
 import { typeDefs } from './schemas/index';
 import { resolvers } from './resolvers/index';
-/* Esquema ejecutable de GraphQL */
-// import { makeExecutableSchema } from 'graphql-tools';
 /* Cliente de mongo para acceder a la base de datos */
 import { MongoClient } from 'mongodb';
 
