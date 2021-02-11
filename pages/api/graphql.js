@@ -1,18 +1,18 @@
-import { ApolloServer } from 'apollo-server-micro';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server-micro';
 import { typeDefs } from './schemas/index';
 import { resolvers } from './resolvers/index';
 /* Esquema ejecutable de GraphQL */
-//import { makeExecutableSchema } from 'graphql-tools';
+// import { makeExecutableSchema } from 'graphql-tools';
 /* Cliente de mongo para acceder a la base de datos */
 import { MongoClient } from 'mongodb';
 
 
 
 /* Se crea el esquema ejecutable pasandole los schemas definidos (typeDefs) y los resolvers*/
-// const schema = makeExecutableSchema({
-//   typeDefs,
-//   resolvers,
-// })
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+})
 
 let db
 
@@ -20,9 +20,9 @@ console.log(process.env.MONGO_DB_URI);
 
 // Crear el servidor a partir de una instancia de ApolloServer:
 const apolloServer = new ApolloServer({
-    // schema,
-    typeDefs,
-    resolvers,
+    schema,
+    // typeDefs,
+    // resolvers,
     context: async () => {
         if (!db) {
             try {
