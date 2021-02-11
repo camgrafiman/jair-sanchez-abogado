@@ -69,10 +69,10 @@ export async function getStaticProps(context) {
     console.log(process.env.SALUDO)
 
     const client = new ApolloClient({
-        // ssrMode: false,
+        ssrMode: typeof window === "undefined",
         link: new HttpLink({
             uri: process.env.GRAPHQL_URI,
-            credentials: 'same-origin'
+            // credentials: 'same-origin'
         }),
         cache: new InMemoryCache(),
         
