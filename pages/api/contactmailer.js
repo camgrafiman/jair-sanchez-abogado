@@ -1,18 +1,13 @@
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default (req, res) => {
     const { nombre, email, telefono, ciudad, consulta, mensaje, confirmacion } = req.body;
 
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: "magcamaleon@gmail.com",
-            pass: "cadreon2016"
-        }
-    });
+    
     const opcionesMail = {
-        from: email,
-        to: "magcamaleon@gmail.com",
+        from: process.env.SENDGRID_SENDER_MAIL, // Cambiar por el sender verificado*
+        to: process.env.MAIL_DESTINO, // Cambiar por el recipiente
         subject: `Nuevo contacto a través del formulario web de ${email}`,
         html: `<p>Nuevo contacto</p>
         <p>Nombre del contacto: ${nombre} </p>
@@ -25,14 +20,23 @@ export default (req, res) => {
         `
     };
 
-    transporter.sendMail(opcionesMail, (err, data) => {
-        if (err) {
-            console.log(err);
-            res.send("error" + JSON.stringify(err));
-        }
-        else {
-            console.log("Mail enviado.", data);
-            res.send("success");
-        }
+    sgMail.send(opcionesMail).then(() => {
+        console.log("Email enviado");
+        res.send("success");
     })
+        .catch((error) => {
+            console.error(error);
+            res.send("error" + JSON.stringify(err));
+    })
+
+    // transporter.sendMail(opcionesMail, (err, data) => {
+    //     if (err) {
+    //         console.log(err);
+    //         res.send("error" + JSON.stringify(err));
+    //     }
+    //     else {
+    //         console.log("Mail enviado.", data);
+    //         res.send("success");
+    //     }
+    // })
 }
