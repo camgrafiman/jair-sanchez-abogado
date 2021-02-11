@@ -6,7 +6,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 /* Cliente de mongo para acceder a la base de datos */
 import { MongoClient } from 'mongodb';
 
-require('dotenv').config();
+
 
 /* Se crea el esquema ejecutable pasandole los schemas definidos (typeDefs) y los resolvers*/
 const schema = makeExecutableSchema({
