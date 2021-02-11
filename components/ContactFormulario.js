@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { router } from 'next';
 import { useForm } from 'react-hook-form';
 import {Container, Col, Row, Form, Button} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,8 +9,30 @@ const ContactFormulario = () => {
 
     const { register, errors, handleSubmit } = useForm();
 
-    const onSubmit = (data) => {
+    const [enviandoForm, setEnviandoForm] = useState(false); 
+
+    const onSubmit = async (data, e) => {
+        setEnviandoForm(true);
         console.log(data);
+
+        const respuesta = await fetch("/api/contactmailer", {
+            method: "POST",
+            headers: { 
+                Accept: "application/json, text/plain, */*",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                ...data
+            })
+        }).then((res) => {
+            console.log("Fetch: ", res);
+            res.status === 200 ? console.log("ok") : console.log("error en el fetch");
+            // res.status === 200 ? router.push("/success") : router.push("/error");
+        })
+        
+        setEnviandoForm(false);
+        // Limpiar el formulario:
+        e.target.reset();
     }
 
     return (
@@ -36,7 +60,8 @@ const ContactFormulario = () => {
                                         <Form.Control as="input" name="nombre" type="text" placeholder="Escriba su nombre"
                                             ref={
                                                 register({
-                                                    required: { value: true, message: 'Debe introducir un nombre.'}
+                                                    required: { value: true, message: 'Debe introducir un nombre.' },
+                                                    minLength: {value:4, message: 'Mínimo 4 caracteres.'}
                                                 })
                                             } />
                                 <span className="text-danger text-small d-block mb-2">
@@ -125,10 +150,18 @@ const ContactFormulario = () => {
 
                         <Form.Group id="formGridCheckbox">
                             <Form.Check type="checkbox" name="confirmacion"
-                                label="Confirmo que he leído la Política de Privacidad" />
+                                label="Confirmo que he leído la Política de Privacidad"
+                                ref={
+                                        register({
+                                            required: { value: true, message: 'Debe aceptar la política de privacidad'}
+                                                })
+                                        } />
+                                <span className="text-danger text-small d-block mb-2">
+                                    {errors?.confirmacion?.message}
+                                </span>
                         </Form.Group>
 
-                        <Button className={styles.botonGeneral + " " + styles.btn5} type="submit">
+                        <Button className={styles.botonGeneral + " " + styles.btn5} type="submit" disabled={enviandoForm}>
                                     <FontAwesomeIcon icon={['fas', 'chevron-circle-right']} className={styles.iconoBoton} />
                                     <span className={styles.textoBoton}>Enviar</span>
                         </Button>
