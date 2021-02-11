@@ -9,7 +9,7 @@ import ContactFormulario from '../components/ContactFormulario';
 
 
 const Index = (props) => {
-    //console.log("datos de getStaticProps: ", props.usuarios);
+    console.log("datos de getStaticProps: ", props.usuarios);
     return (
         <>
             <ContainerPrincipal
