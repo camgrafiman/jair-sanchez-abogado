@@ -73,26 +73,38 @@ export async function getStaticProps(context) {
         link: new HttpLink({
             uri: process.env.GRAPHQL_URI,
             // credentials: 'same-origin'
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            }
         }),
         cache: new InMemoryCache(),
         
     })
 
-    const {data} = await client.query({
-        query: gql`
-        query users {
-            getUsuarios {
-                _id
-                nombre
-                apellido
-                email
-            }
-        }
-        
-        `
-    })
+    try {
+        const {data} = await client.query({
+                query: gql`
+                query users {
+                    getUsuarios {
+                        _id
+                        nombre
+                        apellido
+                        email
+                    }
+                }
+                
+                `
+            })
 
-    console.log('data ', data.getUsuarios);
+            console.log('data ', data.getUsuarios);
+    }
+    catch (error) {
+        console.log(error)
+    }
+
+    
 
     return {
         props: {
