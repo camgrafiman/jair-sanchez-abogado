@@ -28,7 +28,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        getUsuarios: [Usuario]!
+        getUsuarios: [Usuario]
         getUsuariosTipo(tipo: String!) : [Usuario]
         getUsuario(_id: ID!): Usuario
         getContactos: [Contacto]!
@@ -49,18 +49,10 @@ const resolvers = {
     Query: {
         getUsuarios: async (_parent, _args, _context, _info) => {
             try {
-                /* retornar datos de la coleccion_usuarios en la database conectada: */
-                // return await _context.db.collection('coleccion_usuarios').findOne().then((data) => {
-                //     // Mismo que en la data de la coleccion, ver mongoDB Atlas:
-                //     console.log(data)
-                //     return data.usuarios
-                // })
-                // /* retornar datos de la coleccion_usuarios en la database conectada: */
-                //console.log(_context.db.collection('coleccion_usuarios').find())
+                
                 const datos = await _context.db.collection('coleccion_usuarios').find({}).toArray();
-                // await datos.forEach(d => {
-                //     console.log(d)
-                // })
+                console.log(datos);
+                
 
                 return datos
             }
@@ -97,18 +89,9 @@ const resolvers = {
         },
         getContactos: async (_parent, _args, _context, _info) => {
             try {
-                /* retornar datos de la coleccion_usuarios en la database conectada: */
-                // return await _context.db.collection('coleccion_usuarios').findOne().then((data) => {
-                //     // Mismo que en la data de la coleccion, ver mongoDB Atlas:
-                //     console.log(data)
-                //     return data.usuarios
-                // })
-                // /* retornar datos de la coleccion_usuarios en la database conectada: */
-                //console.log(_context.db.collection('coleccion_usuarios').find())
+                
                 const datos = await _context.db.collection('coleccion_contactos').find({}).toArray();
-                // await datos.forEach(d => {
-                //     console.log(d)
-                // })
+                
 
                 return datos
             }
@@ -142,56 +125,8 @@ const resolvers = {
             } catch (error) {
                 throw error;
             }
-        },
-        // getContactos: async (_parent, _args, _context, _info) => {
-        //     try {
-        //         /* retornar datos de la coleccion_usuarios en la database conectada: */
-        //         return await _context.db.collection('coleccion_contactos').findOne().then((data) => {
-        //             // Mismo que en la data de la coleccion, ver mongoDB Atlas:
-        //             console.log(data)
-        //             return data.contactos
-        //         })
-        //     }
-        //     catch (error) {
-        //         throw error;
-        //     }
-        // },
-        // getContactosConsulta: async (_parent, args, _context, _info) => {
-        //     try {
-        //         // console.log("nombre", args.nombre);
-        //         const {consulta} = args;
-        //         /* retornar datos de la coleccion_usuarios en la database conectada: */
-        //         return await _context.db.collection('coleccion_contactos').findOne().then((data) => {
-        //             // Mismo que en la data de la coleccion, ver mongoDB Atlas:
-        //             const contactoSel = data.contactos.filter(contacto => {
-        //                 return contacto.consulta == consulta;
-        //             })[0]
-        //             return contactoSel
-        //         })
-                
-                
-        //     } catch (error) {
-        //         throw error;
-        //     }
-        // },
-        // getContacto: async (_parent, args, _context) => {
-        //     try {
-        //         // console.log("nombre", args.nombre);
-        //         const {_id} = args;
-        //         /* retornar datos de la coleccion_usuarios en la database conectada: */
-        //         return await _context.db.collection('coleccion_contactos').findOne({_id: new objectID(_id)}).then((data) => {
-        //             // Mismo que en la data de la coleccion, ver mongoDB Atlas:
-        //             const contactoSel = data.contactos.filter(contactos => {
-        //                 return contactos._id == _id;
-        //             })[0]
-        //             return contactoSel
-        //         })
-                
-                
-        //     } catch (error) {
-        //         throw error;
-        //     }
-        // }
+        }
+        
     },
     Mutation: {
         addUsuarios: async (_parent, args, _context, _info) => {
@@ -205,7 +140,7 @@ const resolvers = {
                     web: args.web
                 }
             try {
-                // _context.db.collection('coleccion_usuarios').insertOne(nuevoUsuario);
+                
                 _context.db.collection('coleccion_usuarios').insertOne(nuevoUsuario);
                 return nuevoUsuario;
                 
@@ -234,39 +169,7 @@ const resolvers = {
             }
         }
     }
-    // Query: {
-    //     getUsuarios: async () => {
-    //         try {
-    //             const usuarios = await axios.get("https://api.github.com/users");
-    //             return usuarios.data.map(({ id, login, avatar_url, name, company, blog }) => ({
-    //                 id,
-    //                 login,
-    //                 avatar_url,
-    //                 name,
-    //                 company,
-    //                 blog
-    //             }));
-    //         }
-    //         catch (error) {
-    //             throw error;
-    //         }
-    //     },
-    //     getUsuario: async (_, args) => {
-    //         try {
-    //             const usuario = await axios.get(`https://api.github.com/users/${args.nombre}`);
-    //             return {
-    //                 id: usuario.data.id,
-    //                 login: usuario.data.login,
-    //                 avatar_url: usuario.data.avatar_url,
-    //                 name: usuario.data.name,
-    //                 company: usuario.data.company,
-    //                 blog: usuario.data.blog
-    //             };
-    //         } catch (error) {
-    //             throw error;
-    //         }
-    //     }
-    // }
+    
 }
 
 
