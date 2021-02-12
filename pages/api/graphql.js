@@ -28,7 +28,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        getUsuarios: [Usuario]
+        
         getUsuariosTipo(tipo: String!) : [Usuario]
         getUsuario(_id: ID!): Usuario
         getContactos: [Contacto]!
@@ -47,19 +47,7 @@ const typeDefs = gql`
 
 const resolvers = { 
     Query: {
-        getUsuarios: async (_parent, _args, _context, _info) => {
-            try {
-                
-                const datos = await _context.db.collection('coleccion_usuarios').find({}).toArray();
-                console.log(datos);
-                
-
-                return datos
-            }
-            catch (error) {
-                throw error;
-            }
-        },
+        
         getUsuariosTipo: async (_parent, args, _context) => {
             try {
                 // console.log("nombre", args.nombre);
