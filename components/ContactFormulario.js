@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { router } from 'next';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import {Container, Col, Row, Form, Button} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../styles/Presentacion.module.scss';
 
 const ContactFormulario = () => {
+
+    const router = useRouter();
 
     const { register, errors, handleSubmit } = useForm();
 
@@ -26,7 +28,7 @@ const ContactFormulario = () => {
             })
         }).then((res) => {
             console.log("Fetch: ", res);
-            res.status === 200 ? console.log("ok") : console.log("error en el fetch");
+            res.status === 200 ? router.push("/contactaremos") : router.push("/error");
             // res.status === 200 ? router.push("/success") : router.push("/error");
         })
         

@@ -1,38 +1,68 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
 /* Cliente de mongo para acceder a la base de datos */
 import { MongoClient } from 'mongodb';
+const objectID = require('mongodb').ObjectID;
 
 
 const typeDefs = gql`
     type Usuario {
         _id: ID!
-        nombre: String
+        nombre: String!
         apellido: String
-        password: String
-        email: String
+        password: String!
+        email: String!
         anoNacimiento: Int
         web: String
-        tipo: String
+        tipo: String!
+    }
+
+    type Contacto {
+        _id: ID!
+        nombre: String!
+        email: String!
+        telefono: String!
+        ciudad: String
+        consulta: String
+        mensaje: String
+        confirmacion: Boolean
     }
 
     type Query {
         getUsuarios: [Usuario]!
         getUsuariosTipo(tipo: String!) : [Usuario]
-        getUsuario(_id: Int!): Usuario
+        getUsuario(_id: ID!): Usuario
+        getContactos: [Contacto]!
+        getContacto(_id: ID!): Contacto
+        getContactosConsulta(consulta: String!): Contacto
+    }
+
+    type Mutation {
+        addUsuarios(nombre: String!, password:String!, email: String!, tipo: String!, apellido: String, anoNacimiento: Int, web: String): Usuario!
+        addContacto(nombre: String!, email: String!, telefono: String!, ciudad: String, consulta: String, mensaje: String, confirmacion: Boolean): Contacto!
+
     }
 
 `;
+
 
 const resolvers = { 
     Query: {
         getUsuarios: async (_parent, _args, _context, _info) => {
             try {
                 /* retornar datos de la coleccion_usuarios en la database conectada: */
-                return await _context.db.collection('coleccion_usuarios').findOne().then((data) => {
-                    // Mismo que en la data de la coleccion, ver mongoDB Atlas:
-                    console.log(data)
-                    return data.usuarios
-                })
+                // return await _context.db.collection('coleccion_usuarios').findOne().then((data) => {
+                //     // Mismo que en la data de la coleccion, ver mongoDB Atlas:
+                //     console.log(data)
+                //     return data.usuarios
+                // })
+                // /* retornar datos de la coleccion_usuarios en la database conectada: */
+                //console.log(_context.db.collection('coleccion_usuarios').find())
+                const datos = await _context.db.collection('coleccion_usuarios').find({}).toArray();
+                // await datos.forEach(d => {
+                //     console.log(d)
+                // })
+
+                return datos
             }
             catch (error) {
                 throw error;
@@ -43,14 +73,10 @@ const resolvers = {
                 // console.log("nombre", args.nombre);
                 const {tipo} = args;
                 /* retornar datos de la coleccion_usuarios en la database conectada: */
-                return await _context.db.collection('coleccion_usuarios').findOne().then((data) => {
-                    // Mismo que en la data de la coleccion, ver mongoDB Atlas:
-                    // console.log(data.usuarios);
-                    const usuarioTipo = data.usuarios.filter(usuario => {
-                        return usuario.tipo == tipo;
-                    })
-                    return usuarioTipo
-                })
+                const usuariostipo = await _context.db.collection('coleccion_usuarios').find({ tipo: tipo }).toArray();
+                console.log(usuariostipo)
+
+                return usuariostipo;
                 
                 
             } catch (error) {
@@ -62,17 +88,148 @@ const resolvers = {
                 // console.log("nombre", args.nombre);
                 const {_id} = args;
                 /* retornar datos de la coleccion_usuarios en la database conectada: */
-                return await _context.db.collection('coleccion_usuarios').findOne().then((data) => {
-                    // Mismo que en la data de la coleccion, ver mongoDB Atlas:
-                    // console.log(data.usuarios);
-                    const usuarioSel = data.usuarios.filter(usuario => {
-                        return usuario._id == _id;
-                    })[0]
-                    return usuarioSel
-                })
+                return await _context.db.collection('coleccion_usuarios').findOne({ _id: new objectID(_id) });
                 
                 
             } catch (error) {
+                throw error;
+            }
+        },
+        getContactos: async (_parent, _args, _context, _info) => {
+            try {
+                /* retornar datos de la coleccion_usuarios en la database conectada: */
+                // return await _context.db.collection('coleccion_usuarios').findOne().then((data) => {
+                //     // Mismo que en la data de la coleccion, ver mongoDB Atlas:
+                //     console.log(data)
+                //     return data.usuarios
+                // })
+                // /* retornar datos de la coleccion_usuarios en la database conectada: */
+                //console.log(_context.db.collection('coleccion_usuarios').find())
+                const datos = await _context.db.collection('coleccion_contactos').find({}).toArray();
+                // await datos.forEach(d => {
+                //     console.log(d)
+                // })
+
+                return datos
+            }
+            catch (error) {
+                throw error;
+            }
+        },
+        getContactosConsulta: async (_parent, args, _context) => {
+            try {
+                // console.log("nombre", args.nombre);
+                const {consulta} = args;
+                /* retornar datos de la coleccion_usuarios en la database conectada: */
+                const contactosConsulta = await _context.db.collection('coleccion_contactos').find({ consulta: consulta }).toArray();
+                console.log(contactosConsulta)
+
+                return contactosConsulta;
+                
+                
+            } catch (error) {
+                throw error;
+            }
+        },
+        getContacto: async (_parent, args, _context) => {
+            try {
+                // console.log("nombre", args.nombre);
+                const {_id} = args;
+                /* retornar datos de la coleccion_usuarios en la database conectada: */
+                return await _context.db.collection('coleccion_contactos').findOne({ _id: new objectID(_id) });
+                
+                
+            } catch (error) {
+                throw error;
+            }
+        },
+        // getContactos: async (_parent, _args, _context, _info) => {
+        //     try {
+        //         /* retornar datos de la coleccion_usuarios en la database conectada: */
+        //         return await _context.db.collection('coleccion_contactos').findOne().then((data) => {
+        //             // Mismo que en la data de la coleccion, ver mongoDB Atlas:
+        //             console.log(data)
+        //             return data.contactos
+        //         })
+        //     }
+        //     catch (error) {
+        //         throw error;
+        //     }
+        // },
+        // getContactosConsulta: async (_parent, args, _context, _info) => {
+        //     try {
+        //         // console.log("nombre", args.nombre);
+        //         const {consulta} = args;
+        //         /* retornar datos de la coleccion_usuarios en la database conectada: */
+        //         return await _context.db.collection('coleccion_contactos').findOne().then((data) => {
+        //             // Mismo que en la data de la coleccion, ver mongoDB Atlas:
+        //             const contactoSel = data.contactos.filter(contacto => {
+        //                 return contacto.consulta == consulta;
+        //             })[0]
+        //             return contactoSel
+        //         })
+                
+                
+        //     } catch (error) {
+        //         throw error;
+        //     }
+        // },
+        // getContacto: async (_parent, args, _context) => {
+        //     try {
+        //         // console.log("nombre", args.nombre);
+        //         const {_id} = args;
+        //         /* retornar datos de la coleccion_usuarios en la database conectada: */
+        //         return await _context.db.collection('coleccion_contactos').findOne({_id: new objectID(_id)}).then((data) => {
+        //             // Mismo que en la data de la coleccion, ver mongoDB Atlas:
+        //             const contactoSel = data.contactos.filter(contactos => {
+        //                 return contactos._id == _id;
+        //             })[0]
+        //             return contactoSel
+        //         })
+                
+                
+        //     } catch (error) {
+        //         throw error;
+        //     }
+        // }
+    },
+    Mutation: {
+        addUsuarios: async (_parent, args, _context, _info) => {
+            const nuevoUsuario = {
+                    nombre: args.nombre,
+                    email: args.email,
+                    password: args.password,
+                    tipo: args.tipo,
+                    apellido: args.apellido,
+                    anoNacimiento: args.anoNacimiento,
+                    web: args.web
+                }
+            try {
+                // _context.db.collection('coleccion_usuarios').insertOne(nuevoUsuario);
+                _context.db.collection('coleccion_usuarios').insertOne(nuevoUsuario);
+                return nuevoUsuario;
+                
+            }
+            catch (error) {
+                throw error;
+            }
+        },
+        addContacto: async (_parent, args, _context, _info) => {
+            const nuevoContacto = {
+                    nombre: args.nombre,
+                    email: args.email,
+                    telefono: args.telefono,
+                    ciudad: args.ciudad,
+                    consulta: args.consulta,
+                    mensaje: args.mensaje,
+                    confirmacion: args.confirmacion
+            }
+            
+            try {
+                _context.db.collection('coleccion_contactos').insertOne(nuevoContacto);
+                return nuevoContacto;
+            }
+            catch (error) {
                 throw error;
             }
         }
