@@ -6,14 +6,14 @@ const objectID = require('mongodb').ObjectID;
 
 const typeDefs = gql`
     type Usuario {
-        _id: ID!
-        nombre: String!
+        _id: ID
+        nombre: String
         apellido: String
-        password: String!
-        email: String!
+        password: String
+        email: String
         anoNacimiento: Int
         web: String
-        tipo: String!
+        tipo: String
     }
 
     type Contacto {
