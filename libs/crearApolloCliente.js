@@ -9,8 +9,8 @@ export default function crearApolloCliente(estadoInicial, ctx) {
     const client = new ApolloClient({
         // ssrMode: Boolean(ctx),
         link: new HttpLink({
-            uri: process.env.GRAPHQL_URI, // Server URL (must be absolute)
-            // uri: "http://localhost:3000/api/graphql",
+            // uri: process.env.GRAPHQL_URI, // Server URL (must be absolute)
+            uri: "https://jair-sanchez-abogado.vercel.app/api/graphql",
             // credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
             headers: {
                 'Content-Type': 'application/json',
