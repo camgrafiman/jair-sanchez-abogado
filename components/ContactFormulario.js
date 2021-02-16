@@ -1,11 +1,34 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import {Container, Col, Row, Form, Button} from 'react-bootstrap';
+import crearApolloCliente from '../pages/crearApolloCliente';
+import { gql, useMutation } from '@apollo/client';
+//import { useMutation } from '@apollo/react-hooks';
+import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../styles/Presentacion.module.scss';
+// import { ApolloClient, InMemoryCache, gql, HttpLink, useMutation } from '@apollo/client';
+
+
 
 const ContactFormulario = () => {
+
+    const AGREGAR_CONTACTO = gql`
+        mutation addContact($nombre: String!, $email: String!, $telefono: String!, $ciudad: String, $consulta: String, $mensaje: String, $confirmacion: Boolean) {
+        addContacto (nombre: $nombre, email: $email, telefono: $telefono, ciudad: $ciudad, consulta: $consulta,mensaje: $mensaje, confirmacion: $confirmacion) {
+            nombre
+            email
+            telefono
+            ciudad
+            consulta
+            mensaje
+            confirmacion
+        }
+    }
+
+`;
+
+    
 
     const router = useRouter();
 
@@ -13,13 +36,30 @@ const ContactFormulario = () => {
 
     const [enviandoForm, setEnviandoForm] = useState(false); 
 
+    const [formData, setFormData] = useState({})
+
+    const  [ agregarContacto, { data } ]= useMutation(AGREGAR_CONTACTO, {variables: formData, client: crearApolloCliente()});
+    // const  [ agregarContacto, { data } ]= useMutation(AGREGAR_CONTACTO, {variables: formData});
+
+    // const [formDone, { loading, error }] = useMutation(AGREGAR_CONTACTO);
+
     const onSubmit = async (data, e) => {
         setEnviandoForm(true);
         console.log(data);
 
+        setFormData({
+            nombre: data.nombre,
+            email: data.email,
+            telefono: data.telefono,
+            ciudad: data.ciudad,
+            consulta: data.consulta,
+            mensaje: data.mensaje,
+            confirmacion: data.confirmacion
+        })
+
         const respuesta = await fetch("/api/contactmailer", {
             method: "POST",
-            headers: { 
+            headers: {
                 Accept: "application/json, text/plain, */*",
                 "Content-Type": "application/json"
             },
@@ -28,9 +68,21 @@ const ContactFormulario = () => {
             })
         }).then((res) => {
             console.log("Fetch: ", res);
-            res.status === 200 ? router.push("/contactaremos") : router.push("/error");
+            console.log("DATA EN ESTE PUNTO: ", data);
+            if (res.status === 200) {
+                
+                //router.push("/contactaremos")
+            }
+            else {
+                router.push("/error");
+            }
+                
+                
             // res.status === 200 ? router.push("/success") : router.push("/error");
-        })
+        }).catch((err) => { console.log(err) });
+        
+        // llamo la mutation:
+        agregarContacto();
         
         setEnviandoForm(false);
         // Limpiar el formulario:
