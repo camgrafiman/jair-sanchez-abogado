@@ -1,5 +1,5 @@
 // import { ApolloClient, InMemoryCache, gql, HttpLink } from '@apollo/client';
-import crearApolloCliente from './crearApolloCliente';
+import crearApolloCliente from '../libs/crearApolloCliente';
 // import { useQuery } from '@apollo/react-hooks';
 import { gql } from '@apollo/client';
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import crearApolloCliente from '../pages/crearApolloCliente';
+import crearApolloCliente from '../libs/crearApolloCliente';
 import { gql, useMutation } from '@apollo/client';
 //import { useMutation } from '@apollo/react-hooks';
 import { Container, Col, Row, Form, Button } from 'react-bootstrap';
