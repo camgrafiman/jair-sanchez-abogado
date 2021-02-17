@@ -51,7 +51,7 @@ const Navegacion = () => {
             <Nav>
                 <Nav.Link href="/consulta"><FontAwesomeIcon icon={['fas', 'address-book']} className={styles.iconos} />Solicitud consulta</Nav.Link>
                 <Nav.Link href="tel:+34638672876"><FontAwesomeIcon icon={['fas', 'phone-alt']} className={styles.iconos} /> 638 67 28 76</Nav.Link>
-                <Nav.Link eventKey={2} href="mailto:info@jairsanchez.es"> <FontAwesomeIcon icon={['fas', 'envelope-open-text']} className={styles.iconos} /> info@jairsanchez.es </Nav.Link>
+                <Nav.Link eventKey={2} href="mailto:jairsanchezabogado@outlook.es"> <FontAwesomeIcon icon={['fas', 'envelope-open-text']} className={styles.iconos} /> jairsanchezabogado@outlook.es </Nav.Link>
             </Nav>
         </Navbar.Collapse>
     </Navbar>
