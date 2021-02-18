@@ -258,7 +258,7 @@ export default function paginaNoEncontrada() {
               <p>La página que buscas no existe.
                 El como ha llegado hasta aqui es un misterio. Pero puedes hacer click en el botón de abajo para ir a la página principal.
               </p>
-              <Link href="/contacto"><button className={styles.botonGeneral + " " + styles.btn5} ><FontAwesomeIcon icon={['fas', 'undo-alt']} className={styles.iconoBoton} /> <span className={styles.textoBoton}>Inicio</span> </button></Link>
+              <Link href="/"><button className={styles.botonGeneral + " " + styles.btn5} ><FontAwesomeIcon icon={['fas', 'undo-alt']} className={styles.iconoBoton} /> <span className={styles.textoBoton}>Inicio</span> </button></Link>
             </div>
           </div>
         </div>

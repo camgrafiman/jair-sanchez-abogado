@@ -1,0 +1,10 @@
+@import './variables.scss';
+
+.enlace {
+    color:$color-principal;
+}
+.enlace:hover {
+    background:$color-principal;
+    color: white;
+    
+}

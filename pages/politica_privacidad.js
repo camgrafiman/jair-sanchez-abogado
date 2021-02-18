@@ -1,9 +1,17 @@
-import styles from '../styles/Index.module.scss';
+import styles from '../styles/Legal.module.scss';
 import ContainerPrincipal from '../components/container';
+import { Container, Row, Col } from 'react-bootstrap';
 const PoliticaPrivacidad = () => {
     return (
         <ContainerPrincipal title="Jair Sánchez - Abogado | Politica de privacidad">
-            <h1>Política de Privacidad</h1>
+            <Container md={10} className="mt-5 mb-5">
+                <Row>
+                    <Col>
+                        <h1 data-aos="fade-up"
+                                data-aos-anchor-placement="top-center">Política de Privacidad</h1>
+                        <p data-aos="fade-up"
+                            data-aos-anchor-placement="top-center">
+                            
             <p>En cumplimiento con el deber de información recogido en artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico, a continuación se reflejan los siguientes datos: el titular de dominio web es Jair Sánchez Bonilla (en adelante jairsanchez.es), con domicilio a estos efectos en Calle xxxxxxx, xx, 35011 Las Palmas de Gran Canaria, número de N.I.F. XXXXXXXX </p>
             <p>Se informa a los usuarios de que los Datos de Carácter personal que recoge (por diferentes medios tales como: Encuestas al interesado, suscripciones al blog o noticias, formularios de petición de información, chats online y fuentes accesibles al público) son objeto de tratamiento automatizado y se incorporan en el Registro de actividades de tratamiento correspondientes, titularidad de Jair Sánchez Bonilla.</p>
             <p>El acceso y/o uso de este portal de jairsanchez.es atribuye la condición de USUARIO, que acepta, desde dicho acceso y/o uso, las Condiciones Generales de Uso aquí reflejadas. Las citadas Condiciones serán de aplicación independientemente de las Condiciones Generales de Contratación que en su caso resulten de obligado cumplimiento.</p>
@@ -37,6 +45,13 @@ const PoliticaPrivacidad = () => {
             <p>Igualmente la inclusión de estas conexiones externas no implicará ningún tipo de asociación, fusión o participación con las entidades conectadas.</p>
             <h4>8. LEGISLACIÓN APLICABLE Y JURISDICCIÓN</h4>
             <p>La relación entre jairsanchez.es y el USUARIO se regirá por la normativa española vigente y cualquier controversia se someterá a los Juzgados y tribunales de la ciudad de Las Palmas de Gran Canaria.</p>
+
+                            </p>
+                    </Col>
+                </Row>
+            
+            </Container>
+            
         </ContainerPrincipal>
 
     )
